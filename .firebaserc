@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "stayapp-4ad22": {
+      "hosting": {
+        "app": [
+          "stayapp-4ad22"
+        ]
+      }
+    }
+  }
+}
