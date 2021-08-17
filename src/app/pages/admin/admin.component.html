@@ -1,49 +1,110 @@
 <mat-toolbar class="shadow-lg p-3 mb-5 rounded" color="primary">
     <mat-toolbar-row>
-        <img class="nav-logo" src="../../../assets/logo.png">
+        <img class="nav-logo" src="../../../assets/logo.png" />
         <span class="spacer"></span>
-        <button mat-icon-button class="nav-icon" aria-label="icon-button">
-      <mat-icon>menu</mat-icon>
+        <button mat-icon-button class="logout-icon" aria-label="logout icon-button">
+      <mat-icon>logout</mat-icon>
     </button>
     </mat-toolbar-row>
 </mat-toolbar>
 
-
-
-<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-</button>
 <mat-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Fill out your name</ng-template>
+            <ng-template matStepLabel>Categoria</ng-template>
             <mat-form-field appearance="fill">
-                <mat-label>Name</mat-label>
-                <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                <mat-label>Categoria</mat-label>
+                <input matInput [(ngModel)]="novosProdutos.produtoCategoria" placeholder="Doces" formControlName="firstCtrl" required />
             </mat-form-field>
             <div>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button matStepperNext>Próximo</button>
             </div>
         </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+    <mat-step [stepControl]="secondFormGroup" label="Nome do Produto">
         <form [formGroup]="secondFormGroup">
             <mat-form-field appearance="fill">
-                <mat-label>Address</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+                <mat-label>Nome</mat-label>
+                <input matInput [(ngModel)]="novosProdutos.produtoNome" formControlName="secondCtrl" placeholder="Donuts" required />
             </mat-form-field>
             <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button matStepperPrevious>Voltar</button>
+                <button mat-button matStepperNext>Próximo</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup" label="Preço">
+        <form [formGroup]="thirdFormGroup">
+            <mat-form-field appearance="fill">
+                <mat-label>Preço</mat-label>
+                <input type="number" matInput [(ngModel)]="novosProdutos.produtoPreco" formControlName="thirdCtrl" placeholder="R$2.00" required />
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperPrevious>Voltar</button>
+                <button mat-button (click)="criarProdutos(this.novosProdutos)" matStepperNext>
+          Pronto
+        </button>
             </div>
         </form>
     </mat-step>
     <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
-        <p>You are now done.</p>
+        <ng-template matStepLabel>Tudo certo</ng-template>
+        <p>Você terminou.</p>
         <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
+            <button mat-button (click)="stepper.reset()">Começar mais uma vez</button>
         </div>
     </mat-step>
 </mat-stepper>
+
+<div class="container-fluid" style="margin-top: 3%">
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3" style="margin-bottom: 5%">
+        <div *ngFor="let produto of produtos; let i = index" class="col">
+            <mat-card class="card-catalago">
+                <mat-card-header class="d-flex justify-content-left">
+                    <mat-card-title class="nome-produto">{{ produto.produtoNome }}</mat-card-title>
+                    <mat-card-subtitle>{{ produto.produtoCategoria }}
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content class="d-flex justify-content-center">
+                    <mat-chip-list aria-label="preço produto">
+                        <mat-chip class="preco-produto" color="primary" selected>{{ produto.produtoPreco | currency: "BRL":true:"1.2-2" }}
+                        </mat-chip>
+                    </mat-chip-list>
+                </mat-card-content>
+                <mat-card-actions class="d-flex justify-content-center">
+                    <button mat-button (click)="editar(produto)" color="accent" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">EDITAR</button>
+                    <button mat-button (click)="apagarProduto(produto.produtoId)" color="warn">APAGAR</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog text-white bg-dark">
+        <div class="modal-content text-white bg-dark">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">EDITAR</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Categoria</mat-label>
+                    <input type="text" [(ngModel)]="atualizarProdutos.produtoCategoria" matInput placeholder="Doces">
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Nome</mat-label>
+                    <input type="text" [(ngModel)]="atualizarProdutos.produtoNome" matInput placeholder="Donuts">
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Preço</mat-label>
+                    <input type="number" [(ngModel)]="atualizarProdutos.produtoPreco" matInput placeholder="R$4.00">
+                </mat-form-field>
+            </div>
+            <div class="modal-footer">
+                <button mat-button color="accent" type="button" data-bs-dismiss="modal">CANCELAR</button>
+                <button mat-button color="warn" (click)="atualizarProduto()" data-bs-dismiss="modal">PRONTO</button>
+            </div>
+        </div>
+    </div>
+</div>
