@@ -51,8 +51,8 @@ export class LoginComponent implements OnInit {
     this.apiService
       .signUp(this.userNewEmail, this.userNewPassword)
       .subscribe((data) => {
-       this.userNewEmail = this.userEmail;
-       this.userNewPassword = this.userNewPassword;
+       this.userEmail = this.userNewEmail;
+       this.userPassword = this.userNewPassword;
        this.login();
       });
 
