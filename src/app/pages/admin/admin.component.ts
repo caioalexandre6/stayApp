@@ -66,7 +66,7 @@ export class AdminComponent implements OnInit {
       });
       setTimeout(() => {
          this.getProdutos();
-       }, 500);
+       }, 1000);
       this.novosProdutos = new Produtos;
       this.novosProdutos.produtoId = Date.now().toString();
 
