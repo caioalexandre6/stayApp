@@ -1,27 +1,44 @@
-# App
+# StayAPP CRUD
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.2.
+Uma breve introdução do CRUD disponibilizado para a StayApp
 
-## Development server
+## O'que foi usado
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### -Firebase 
+Neste projeto para realizar o CRUD foi utilizado o *Cloud Firestore*.
+ 
+Como autenticador foi usado o *Firebase Authentication*.
 
-## Code scaffolding
+Como hospedagem foi utilizado o *Firebase Hosting*.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Para WebService foi utilizado o *Cloud Functions*.
 
-## Build
+### -Angular
+Neste projeto foi utilizado a Framework Angular na versão  *12.1.5*
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+@angular-devkit/architect       0.1201.4
 
-## Running unit tests
+@angular-devkit/build-angular   12.1.4 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+@angular-devkit/core            12.1.4
 
-## Running end-to-end tests
+@angular-devkit/schematics      12.1.4
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+@angular/cdk                    12.2.1
 
-## Further help
+@angular/cli                    12.1.4
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+@angular/fire                   6.1.5
+
+@angular/material               12.2.1
+
+@schematics/angular             12.1.4
+
+rxjs                            6.6.7
+
+typescript                      4.3.5
+
+
+
+## License
+[none]
