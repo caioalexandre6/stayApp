@@ -13,6 +13,9 @@ Como hospedagem foi utilizado o *Firebase Hosting*.
 
 Para WebService foi utilizado o *Cloud Functions*.
 
+### -Bootstrap && Angular Material
+Neste projeto como estilo foram usados o *Bootstrap 5.1* e também o *Angular Material 12.2.1*
+
 ### -Angular
 Neste projeto foi utilizado a Framework Angular na versão  *12.1.5*
 
