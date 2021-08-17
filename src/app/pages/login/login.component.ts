@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
     this.option = false;
   }
 
+/* Trocar de login para cadastrar usando NgIF */
   changeLogin() {
     if (this.option == false) {
       this.option = true;
@@ -32,25 +33,29 @@ export class LoginComponent implements OnInit {
     }
   }
 
+
+/* Realizar login pelo firebase auth */
   login() {
     this.auth
       .signInWithEmailAndPassword(this.userEmail, this.userPassword)
       .then((value) => {
-        console.log('Nice, it worked!');
         this.router.navigate(['/admin']);
       })
       .catch((err) => {
-        console.log('Something went wrong: ', err.message);
+        console.log('Alguma coisa deu errado: ', err.message);
       });
   }
 
-  /*  Metodo para realizar um novo cadastro passando os objetos de login e senha */
+  /*  Metodo para realizar um novo cadastro e login em seguida passando os objetos de login e senha */
   cadastrar() {
     this.apiService
       .signUp(this.userNewEmail, this.userNewPassword)
       .subscribe((data) => {
-        console.log('Respostass', data);
+       this.userNewEmail = this.userEmail;
+       this.userNewPassword = this.userNewPassword;
+       this.login();
       });
+
   }
 
   ngOnInit(): void {}

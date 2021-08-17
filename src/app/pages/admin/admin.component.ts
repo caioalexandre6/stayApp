@@ -1,6 +1,8 @@
+import { Router } from '@angular/router';
 import { Produtos } from './../../models/produtos';
 import { ApiService } from './../../services/ApiService';
 import {Component, OnInit} from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 
 @Component({
@@ -19,7 +21,7 @@ export class AdminComponent implements OnInit {
   produtoEscolhido: number;
   emailFormControl : FormControl;
 
-  constructor(private _formBuilder: FormBuilder, private apiService: ApiService) {
+  constructor(private _formBuilder: FormBuilder, private apiService: ApiService, private router: Router,  public auth: AngularFireAuth,) {
    /*  Inicialização de objetos */
         this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
@@ -97,6 +99,12 @@ atualizarProduto(){
        }, 300);
       });
 }
+
+ logout() {
+    this.auth.signOut().then(() => {
+      this.router.navigate(['/']);
+    });
+  }
 
 
   ngOnInit() {
